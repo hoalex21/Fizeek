@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function NavBar() {
     return (
-        <nav className="max-w-screen flex justify-center shadow-inner border-b-2 p-4">
+        <nav className="max-w-screen flex justify-center shadow p-4">
             <div className="container flex justify-between">
                 <div>
                     <Link href="/">Fizeek.</Link>
