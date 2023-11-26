@@ -3,10 +3,18 @@
 import Link from "next/link";
 import UserInput from "../ui/user-input";
 import UserForm from "../ui/user-form";
+import LoginAccount from "./actions/loginAccount";
+import { useFormState } from "react-dom";
+
+const initialState = {
+    message: null
+}
 
 export default function Login() {
+    const [state, formAction] = useFormState(LoginAccount, initialState);
+
     return (
-        <UserForm action={() => {}}>
+        <UserForm action={formAction}>
             <fieldset>
                 <legend className="text-center">
                     Log in to Fizeek
@@ -16,6 +24,7 @@ export default function Login() {
                 <br />
 
                 <UserInput label="Email" type="email" id="email" name="email"/>
+                <br />
                 <UserInput label="Password" type="password" id="password" name="password"/>
             </fieldset>
 
