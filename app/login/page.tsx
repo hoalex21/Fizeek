@@ -1,10 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import UserInput from "../ui/user-input";
 import UserForm from "../ui/user-form";
 
 export default function Login() {
     return (
-        <UserForm>
+        <UserForm action={() => {}}>
             <fieldset>
                 <legend className="text-center">
                     Log in to Fizeek
@@ -13,8 +15,7 @@ export default function Login() {
                 <hr />
                 <br />
 
-                <UserInput label="Email" type="text" id="email" name="email"/>
-                <br/> <br/>
+                <UserInput label="Email" type="email" id="email" name="email"/>
                 <UserInput label="Password" type="password" id="password" name="password"/>
             </fieldset>
 
