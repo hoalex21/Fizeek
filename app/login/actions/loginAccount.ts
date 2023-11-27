@@ -17,6 +17,7 @@ export default async function LoginAccount(prevState: any, formData: FormData) {
         });
 
         if (user?.password === password) {
+            // TODO: Authenticate user
             redirect("/");
         }
     }
