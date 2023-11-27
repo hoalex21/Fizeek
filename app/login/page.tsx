@@ -3,18 +3,28 @@
 import Link from "next/link";
 import UserInput from "../ui/user-input";
 import UserForm from "../ui/user-form";
-import LoginAccount from "./actions/loginAccount";
-import { useFormState } from "react-dom";
+import { FormEvent } from "react";
+import { signIn } from "next-auth/react";
 
 const initialState = {
     message: null
 }
 
 export default function Login() {
-    const [state, formAction] = useFormState(LoginAccount, initialState);
+    async function onSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        const formData = new FormData(event.currentTarget);
+
+        const email = formData.get("email")?.toString();
+        const password = formData.get("password")?.toString();
+
+        const user = await signIn("credentials", {email: email, password: password, redirect: true, callbackUrl: "/"});
+        console.log(user);
+    }
 
     return (
-        <UserForm action={formAction}>
+        <UserForm onSubmit={onSubmit}>
             <fieldset>
                 <legend className="text-center">
                     Log in to Fizeek
