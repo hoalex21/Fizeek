@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const authOptions = {
+export const authOptions = {
     providers: [
         CredentialsProvider({
             credentials: {
@@ -30,6 +30,8 @@ const authOptions = {
     ],
     pages: {
         signIn: "/login",
+        // signOut: '/auth/signout',
+        // error: '/auth/error',
     }
 }
 

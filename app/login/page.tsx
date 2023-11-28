@@ -5,12 +5,16 @@ import UserInput from "../ui/user-input";
 import UserForm from "../ui/user-form";
 import { FormEvent } from "react";
 import { signIn } from "next-auth/react";
-
-const initialState = {
-    message: null
-}
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function Login() {
+    const { data: session, status } = useSession();
+
+    if (status === "authenticated") {
+        redirect("/");
+    }
+
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
