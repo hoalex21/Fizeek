@@ -6,6 +6,8 @@ import UserInput from "../ui/user-input";
 import UserForm from "../ui/user-form";
 import SignupAccount from "./actions/signupAccount";
 import { useFormState } from "react-dom";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const initialState = {
     errorFirstName: null,
@@ -18,7 +20,12 @@ const initialState = {
 }
 
 export default function Signup() {
+    const { data: session, status } = useSession();
     const [state, formAction] = useFormState(SignupAccount, initialState);
+
+    if (status === "authenticated") {
+        redirect("/");
+    }
 
     return (
         <UserForm action={formAction}>
