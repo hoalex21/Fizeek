@@ -6,11 +6,10 @@ export default function CalculatorBmi() {
             <div className="border-2 rounded-md w-3/12">
                 <form>
                     <fieldset>
-                        <legend className="text-xl text-center">Body Mass Index Calculator</legend>
+                        <legend className="text-xl text-center p-2">Body Mass Index Calculator</legend>
                         <hr />
-                        <br />
-                        
-                        <div className="container px-4">
+
+                        <div className="p-4">
                             <span>Height: </span>
 
                             <input className="w-10 border-2 rounded-md pl-1" />
@@ -28,13 +27,9 @@ export default function CalculatorBmi() {
                         </div>
                     </fieldset>
                 </form>
-
-                <br />
                 <hr />
-                <br />
 
-                <p className="px-4">BMI: <span id="bmi-result">N/A</span></p>
-                <br />
+                <p className="p-4">BMI: <span id="bmi-result">N/A</span></p>
             </div>
         </div>
     );
