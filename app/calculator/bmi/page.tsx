@@ -12,10 +12,10 @@ export default function CalculatorBmi() {
                         <div className="py-5">
                             <span>Height: </span>
 
-                            <input className="w-10 border-2 rounded-md pl-1" />
+                            <input className="w-10 border-2 rounded-md pl-1" maxLength={2} />
                             <label className="mr-4"> Feet</label>
 
-                            <input className="w-10 border-2 rounded-md pl-1" />
+                            <input className="w-10 border-2 rounded-md pl-1" maxLength={2} />
                             <label> Inches</label>
 
                             <br />
