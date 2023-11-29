@@ -15,6 +15,9 @@ export default function NavBar() {
                 </div>
                 <div>
                     <ul className="flex">
+                        <li>
+                            <Link href="/calculator/bmi" className="mr-4">BMI</Link>
+                        </li>
                         {
                             status === "authenticated"? (
                                 <>
