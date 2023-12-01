@@ -7,7 +7,7 @@ export default function SignOut() {
     const { data: session, status } = useSession();
 
     if (status === "unauthenticated") {
-        redirect("/signup");
+        redirect("/auth/signup");
     } else {
         signOut({ redirect: false, callbackUrl: "/" });
     }

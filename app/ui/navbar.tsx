@@ -28,10 +28,10 @@ export default function NavBar() {
                             ) : (
                                 <>
                                     <li className="mr-4">
-                                        <Link href="/signup">Sign Up</Link>
+                                        <Link href="/auth/signup">Sign Up</Link>
                                     </li>
                                     <li>
-                                        <Link href="/login">Login</Link>
+                                        <Link href="/auth/login">Login</Link>
                                     </li>
                                 </>
                             )

@@ -1,7 +1,6 @@
 "use server";
 
 import { PrismaClient } from "@prisma/client";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
@@ -81,5 +80,5 @@ export default async function SignupAccount(prevState: any, formData: FormData) 
         });
     }
     
-    redirect("/login");
+    redirect("/auth/login");
 }

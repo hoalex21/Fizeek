@@ -29,8 +29,8 @@ export const authOptions = {
         }),
     ],
     pages: {
-        signIn: "/login",
-        signOut: '/signout',
+        signIn: "/auth/login",
+        signOut: '/auth/signout',
         // error: '/error',
     }
 }

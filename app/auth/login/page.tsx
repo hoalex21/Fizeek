@@ -45,7 +45,7 @@ export default function Login() {
             <br />
 
             <div className="flex justify-between items-center">
-                <p>Need an account? Sign up <Link href="/signup" className="text-blue-500">here</Link>.</p>
+                <p>Need an account? Sign up <Link href="/auth/signup" className="text-blue-500">here</Link>.</p>
                 
                 <button type="submit" className="bg-black text-white rounded-lg p-2">
                     Log In
