@@ -3,8 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import NavBar from './ui/navbar'
 import { getServerSession } from 'next-auth'
-import SessionProvider from '@/app/ui/SessionProvider'
-import Image from 'next/image';
+import SessionProvider from '@/app/components/SessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
