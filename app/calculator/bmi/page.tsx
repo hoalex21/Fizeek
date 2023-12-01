@@ -5,7 +5,6 @@ import { FormEvent } from "react";
 export default function CalculatorBmi() {
     const notAvailable = "N/A";
 
-
     function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
