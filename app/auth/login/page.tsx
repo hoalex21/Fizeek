@@ -7,6 +7,7 @@ import { FormEvent } from "react";
 import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import NavBar from "@/app/ui/navbar";
 
 export default function Login() {
     const { data: session, status } = useSession();
@@ -27,29 +28,35 @@ export default function Login() {
     }
 
     return (
-        <UserForm onSubmit={onSubmit}>
-            <fieldset>
-                <legend className="text-center">
-                    Log in to Fizeek
-                </legend>
+        <>
+            <NavBar />
+            
+            <main>
+                <UserForm onSubmit={onSubmit}>
+                    <fieldset>
+                        <legend className="text-center">
+                            Log in to Fizeek
+                        </legend>
 
-                <hr />
-                <br />
+                        <hr />
+                        <br />
 
-                <UserInput label="Email" type="email" id="email" name="email"/>
-                <br />
-                <UserInput label="Password" type="password" id="password" name="password"/>
-            </fieldset>
+                        <UserInput label="Email" type="email" id="email" name="email"/>
+                        <br />
+                        <UserInput label="Password" type="password" id="password" name="password"/>
+                    </fieldset>
 
-            <br />
+                    <br />
 
-            <div className="flex justify-between items-center">
-                <p>Need an account? Sign up <Link href="/auth/signup" className="text-blue-500">here</Link>.</p>
-                
-                <button type="submit" className="bg-black text-white rounded-lg p-2">
-                    Log In
-                </button>
-            </div>
-        </UserForm>
+                    <div className="flex justify-between items-center">
+                        <p>Need an account? Sign up <Link href="/auth/signup" className="text-blue-500">here</Link>.</p>
+                        
+                        <button type="submit" className="bg-black text-white rounded-lg p-2">
+                            Log In
+                        </button>
+                    </div>
+                </UserForm>
+            </main>
+        </>
     );
 }

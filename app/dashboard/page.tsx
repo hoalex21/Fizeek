@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import NavBar from "../ui/navbar";
 
 export default function Dashboard() {
     const { data: session, status } = useSession();
@@ -12,8 +13,12 @@ export default function Dashboard() {
         if (user) {
             return (
                 <>
-                    <p>{user.email}</p>
-                    <p>{user.name}</p>
+                    <NavBar />
+                    
+                    <main>
+                        <p>{user.email}</p>
+                        <p>{user.name}</p>
+                    </main>
                 </>
             );
         }
