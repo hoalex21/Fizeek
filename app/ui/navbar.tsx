@@ -11,7 +11,7 @@ export default function NavBar() {
         <nav className="max-w-screen shadow p-4 flex justify-center">
             <div className="container grid grid-cols-3 content-center">
                 <div>
-                    <Link href="/">Fizeek.</Link>
+                    <Link href="/" className="font-bold">Fizeek.</Link>
                 </div>
 
                 {/* Site Features */}
