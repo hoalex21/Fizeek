@@ -19,9 +19,12 @@ export const authOptions = {
                 });
 
                 if (user) {
-                    if (user.password === credentials?.password) {
-                        return { id: user?.id.toString() };
+                    const userObject = {
+                        id: user.id.toString(),
+                        email: user.email.toString(),
+                        name: user.username.toString()
                     }
+                    return userObject;
                 }
 
                 return null;
