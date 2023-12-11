@@ -2,6 +2,7 @@
 
 import prisma from "@/db";
 import { redirect } from "next/navigation";
+import bcrypt from 'bcrypt';
 
 const cannotBeEmpty = "Cannot be empty"
 
@@ -39,7 +40,7 @@ export default async function SignupAccount(prevState: any, formData: FormData) 
     // USERNAME
     prevState.errorUsername = username? null : cannotBeEmpty;
 
-    // handle username is not unique/ already taken
+    // handle username is not unique or is already taken
     if (username) {
         const user = await prisma.user.findUnique({
             where: {
@@ -53,7 +54,31 @@ export default async function SignupAccount(prevState: any, formData: FormData) 
     // PASSWORD
     prevState.errorPassword = password? null : cannotBeEmpty;
 
-    // TODO: handle password is not valid (TODO: set password requirements before implementing this handler)
+    /* 
+        Passwords need to be at least 8 characters long, 
+        have at least 1 special character, 
+        at least 1 number, 
+        at least 1 uppercase letter, 
+        and at least 1 lowercase letter 
+    */
+    if (password) {
+        const regexSpecialCharacters = /[!@#$%^&*()\-+={}[\]:;"'<>,.?\/|\\]/;
+        const regexNumbers = /\d/;
+        const regexUpperCaseLetters = /[A-Z]/;
+        const regexLowerCaseLetters = /[a-z]/;
+
+        if (password.length < 8) {
+            prevState.errorPassword = "Password must contain at least 8 characters";
+        } else if (!regexSpecialCharacters.test(password)) {
+            prevState.errorPassword = "Password must contain at least 1 special character";
+        } else if (!regexNumbers.test(password)) {
+            prevState.errorPassword = "Password must contain at least 1 number";
+        } else if (!regexUpperCaseLetters.test(password)) {
+            prevState.errorPassword = "Password must contain at least 1 uppercase letter";
+        } else if (!regexLowerCaseLetters.test(password)) {
+            prevState.errorPassword = "Password must contain at least 1 lowercase letter";
+        }
+    }
 
     // PASSWORD CONFIRMATION
     prevState.errorPasswordConfirmation = password === passwordConfirmation? null : "Passwords do not match";
@@ -67,16 +92,18 @@ export default async function SignupAccount(prevState: any, formData: FormData) 
 
     // Create new user
     if (firstName && lastName && email && emailConfirmation && username && password && passwordConfirmation) {
+        const passwordHash = await bcrypt.hash(password, 10);
+
         await prisma.user.create({
             data: {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 username: username,
-                password: password,
+                password: passwordHash,
             }
         });
     }
-    
+
     redirect("/auth/login");
 }
