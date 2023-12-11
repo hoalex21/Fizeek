@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from "@/db";
+import bcrypt from "bcrypt";
 
 export const authOptions = {
     providers: [
@@ -16,13 +17,15 @@ export const authOptions = {
                     }
                 });
 
-                if (user) {
-                    const userObject = {
-                        id: user.id.toString(),
-                        email: user.email.toString(),
-                        name: user.username.toString()
+                if (user && credentials) {
+                    if (await bcrypt.compare(credentials.password, user.password)) {
+                        const userObject = {
+                            id: user.id.toString(),
+                            email: user.email.toString(),
+                            name: user.username.toString()
+                        }
+                        return userObject;
                     }
-                    return userObject;
                 }
 
                 return null;
