@@ -24,7 +24,6 @@ export default function Login() {
         const password = formData.get("password")?.toString();
 
         const user = await signIn("credentials", {email: email, password: password, redirect: true, callbackUrl: "/"});
-        console.log(user);
     }
 
     return (
