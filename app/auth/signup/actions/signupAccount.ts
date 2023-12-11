@@ -1,9 +1,7 @@
 "use server";
 
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/db";
 import { redirect } from "next/navigation";
-
-const prisma = new PrismaClient();
 
 const cannotBeEmpty = "Cannot be empty"
 
