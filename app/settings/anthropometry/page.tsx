@@ -1,3 +1,3 @@
 export default function Anthropometry() {
-    return <p>General</p>;
+    return <p>Anthropometry</p>;
 }
