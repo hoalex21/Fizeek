@@ -5,7 +5,7 @@ export default function SideBar() {
     const pathName = usePathname();
 
     return (
-        <div className="bg-white p-3 col-span-3 h-fit rounded-lg">
+        <div className="bg-white p-3 lg:col-span-1 col-span-4 h-fit rounded-lg">
             <ul>
                 <li className="text-center pb-1">Settings</li>
                 <Link href="/settings/general">
