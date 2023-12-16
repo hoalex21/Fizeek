@@ -35,3 +35,21 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.addAll({
+    inputSignup(firstName, lastName, email, username, password) {
+        cy.get('input[id="first-name"]').type(firstName);
+        cy.get('input[id="last-name"]').type(lastName);
+        cy.get('input[id="email"]').type(email);
+        cy.get('input[id="email-confirmation"]').type(email);
+        cy.get('input[id="username"]').type(username);
+        cy.get('input[id="password"]').type(password);
+        cy.get('input[id="password-confirmation"]').type(password);
+        cy.get('button[type="submit"]').click();
+    },
+    inputLogin(email, password) {
+        cy.get('input[id="email"]').type(email);
+        cy.get('input[id="password"]').type(password);
+        cy.get('button[type="submit"]').click();
+    },
+});

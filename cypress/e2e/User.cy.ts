@@ -17,14 +17,7 @@ describe('User Authentication', async () => {
     cy.visit("/auth/signup");
 
     // Act
-    cy.get('input[id="first-name"]').type(user.firstName);
-    cy.get('input[id="last-name"]').type(user.lastName);
-    cy.get('input[id="email"]').type(user.email);
-    cy.get('input[id="email-confirmation"]').type(user.email);
-    cy.get('input[id="username"]').type(user.username);
-    cy.get('input[id="password"]').type(user.password);
-    cy.get('input[id="password-confirmation"]').type(user.password);
-    cy.get('button[type="submit"]').click();
+    cy.inputSignup(user.firstName, user.lastName, user.email, user.username, user.password);
 
     // Assert
     cy.url().should('include', 'auth/login');
@@ -44,9 +37,7 @@ describe('User Authentication', async () => {
     cy.visit("/auth/login");
 
     // Act
-    cy.get('input[id="email"]').type(user.email);
-    cy.get('input[id="password"]').type(user.password);
-    cy.get('button[type="submit"]').click();
+    cy.inputLogin(user.email, user.password);
 
     // Assert
     cy.url().should('eq', Cypress.config().baseUrl);
