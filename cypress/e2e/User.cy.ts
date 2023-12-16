@@ -101,4 +101,44 @@ describe('User Authentication', async () => {
       cy.get('nav').contains('Sign Out');
     });
   });
+
+  it('Signup through need an account', () => {
+    // Arrange
+    cy.visit('/');
+    cy.get('a').contains('Login').click();
+    cy.get('a').contains('here').click();
+
+    // Act
+    cy.inputSignup(user.firstName, user.lastName, user.email, user.username, user.password);
+
+    // Assert
+    cy.url().should('include', 'auth/login');
+    cy.task('getUserByEmail', user.email).then((result:any) => {
+      const createdUser = result;
+      cy.wrap({firstName: createdUser.firstName}).its('firstName').should('eql', user.firstName);
+      cy.wrap({lastName: createdUser.lastName}).its('lastName').should('eql', user.lastName);
+      cy.wrap({email: createdUser.email}).its('email').should('eql', user.email);
+      cy.wrap({username: createdUser.username}).its('username').should('eql', user.username);
+      cy.task('compareHash', {string: user.password, hash: createdUser.password}).should('be.true');
+    });
+  });
+
+  it('Log in through already have an account', () => {
+    // Arrange
+    cy.task('insertUser', user);
+    cy.visit('/');
+    cy.get('a').contains('Sign Up').click();
+    cy.get('a').contains('here').click();
+    cy.location('pathname').should('eql', '/auth/login');
+
+    // Act
+    cy.on('url:changed', (url) => {
+
+    });
+    cy.inputLogin(user.email, user.password);
+
+    // Arrange
+    cy.url().should('eq', Cypress.config().baseUrl);
+    cy.get('nav').contains('Sign Out');
+  })
 });
