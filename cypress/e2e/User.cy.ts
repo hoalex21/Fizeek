@@ -52,4 +52,22 @@ describe('User Authentication', async () => {
     cy.url().should('eq', Cypress.config().baseUrl);
     cy.get('nav').contains('Sign Out');
   });
+
+  it('Logged in user should be able to sign out', () => {
+    // Arrange
+    cy.task('insertUser', user);
+    cy.visit("/auth/login");
+
+    cy.get('input[id="email"]').type(user.email);
+    cy.get('input[id="password"]').type(user.password);
+    cy.get('button[type="submit"]').click();
+
+    // Act
+    cy.get('nav').contains('Sign Out').click();
+
+    // Assert
+    cy.url().should('eq', Cypress.config().baseUrl);
+    cy.get('nav').contains('Sign Up');
+    cy.get('nav').contains('Login');
+  });
 });
