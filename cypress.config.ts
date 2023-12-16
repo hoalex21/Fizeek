@@ -1,5 +1,6 @@
 import { defineConfig } from "cypress";
 import prisma from "./db";
+import bcrypt from "bcrypt";
 
 export default defineConfig({
   e2e: {
@@ -14,7 +15,19 @@ export default defineConfig({
             }
           });
           return null;
-        }
+        },
+        async getUserByEmail(email) {
+          const users = await prisma.user.findMany({
+            where: {
+              email: email
+            }
+          });
+
+          return users[0];
+        },
+        async compareHash({string, hash}) {
+          return bcrypt.compare(string, hash);
+        },
       });
     },
   },
