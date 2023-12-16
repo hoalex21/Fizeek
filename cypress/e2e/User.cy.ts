@@ -9,6 +9,8 @@ const user = {
 
 describe('User Authentication', async () => {
   beforeEach(() => {
+    cy.visit("/api/auth/signout");
+    cy.visit("/");
     cy.task('removeUserByEmail', user.email);
   });
 
@@ -31,34 +33,52 @@ describe('User Authentication', async () => {
     });
   });
 
-  it('Registered user should be able to login', () => {
-    // Arrange
-    cy.task('insertUser', user);
-    cy.visit("/auth/login");
+  ["/auth/login", "/api/auth/signin"].forEach((url) => {
+    it('Registered user should be able to login', () => {
+      // Arrange
+      cy.task('insertUser', user);
+      cy.visit("/auth/login");
 
-    // Act
-    cy.inputLogin(user.email, user.password);
+      // Act
+      cy.inputLogin(user.email, user.password);
 
-    // Assert
-    cy.url().should('eq', Cypress.config().baseUrl);
-    cy.get('nav').contains('Sign Out');
+      // Assert
+      cy.url().should('eq', Cypress.config().baseUrl);
+      cy.get('nav').contains('Sign Out');
+    });
   });
 
-  it('Logged in user should be able to sign out', () => {
-    // Arrange
-    cy.task('insertUser', user);
-    cy.visit("/auth/login");
+  ["/auth/login", "/api/auth/signin"].forEach((url) => {
+    it('Logged in user should be able to sign out', () => {
+      // Arrange
+      cy.task('insertUser', user);
+      cy.visit(url);
+      cy.inputLogin(user.email, user.password);
 
-    cy.get('input[id="email"]').type(user.email);
-    cy.get('input[id="password"]').type(user.password);
-    cy.get('button[type="submit"]').click();
+      // Act
+      cy.get('nav').contains('Sign Out').click();
 
-    // Act
-    cy.get('nav').contains('Sign Out').click();
+      // Assert
+      cy.url().should('eq', Cypress.config().baseUrl);
+      cy.get('nav').contains('Sign Up');
+      cy.get('nav').contains('Login');
+    });
+  });
 
-    // Assert
-    cy.url().should('eq', Cypress.config().baseUrl);
-    cy.get('nav').contains('Sign Up');
-    cy.get('nav').contains('Login');
+  ["/auth/login", "/api/auth/signin"].forEach(url => {
+    it('Logged in user should be able to sign out by url', () => {
+      // Arrange
+      cy.task('insertUser', user);
+      cy.visit(url);
+      cy.inputLogin(user.email, user.password);
+
+      // Act
+      cy.visit("/auth/signout");
+
+      // Assert
+      cy.location('pathname').should('eq', '/auth/signup');
+      cy.get('nav').contains('Sign Up');
+      cy.get('nav').contains('Login');
+    });
   });
 });

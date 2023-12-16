@@ -36,6 +36,8 @@
 //   }
 // }
 
+
+// User Authentication
 Cypress.Commands.addAll({
     inputSignup(firstName, lastName, email, username, password) {
         cy.get('input[id="first-name"]').type(firstName);
