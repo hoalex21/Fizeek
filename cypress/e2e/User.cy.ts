@@ -7,14 +7,13 @@ const user = {
 }
 
 
-describe('signup', async () => {
+describe('User Authentication', async () => {
   beforeEach(() => {
     cy.task('removeUserByEmail', user.email);
   });
 
   it('New user should be able to signup for an account', () => {
     // Arrange
-    cy.task('removeUserByEmail', user.email);
     cy.visit("/auth/signup");
 
     // Act
@@ -37,5 +36,20 @@ describe('signup', async () => {
       cy.wrap({username: createdUser.username}).its('username').should('eql', user.username);
       cy.task('compareHash', {string: user.password, hash: createdUser.password}).should('be.true');
     });
+  });
+
+  it('Registered user should be able to login', () => {
+    // Arrange
+    cy.task('insertUser', user);
+    cy.visit("/auth/login");
+
+    // Act
+    cy.get('input[id="email"]').type(user.email);
+    cy.get('input[id="password"]').type(user.password);
+    cy.get('button[type="submit"]').click();
+
+    // Assert
+    cy.url().should('eq', Cypress.config().baseUrl);
+    cy.get('nav').contains('Sign Out');
   });
 });

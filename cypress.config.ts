@@ -8,6 +8,19 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
       on('task', {
+        async insertUser(user) {
+          const passwordHash = await bcrypt.hash(user.password, 10);
+          await prisma.user.create({
+            data: {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                username: user.username,
+                password: passwordHash,
+              }
+          });
+          return null;
+        },
         async removeUserByEmail(email) {
           await prisma.user.deleteMany({
             where: {
