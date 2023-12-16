@@ -30,6 +30,9 @@ export default function NavBar() {
                             status === "authenticated"? (
                                 <>
                                     <li>
+                                        <Link className="mx-4" href="/settings">Settings</Link>
+                                    </li>
+                                    <li>
                                         <Link href="/" onClick={() => signOut()}>Sign Out</Link>
                                     </li>
                                 </>
