@@ -60,7 +60,7 @@ export default function Signup() {
                     <br />
 
                     <div className="flex justify-between items-center">
-                        <p>Already have an account? Log in <Link href="/login" className="text-blue-500">here</Link>.</p>
+                        <p>Already have an account? Log in <Link href="/auth/login" className="text-blue-500">here</Link>.</p>
                         
                         <button type="submit" className="bg-black text-white rounded-lg p-2">
                             Sign Up
