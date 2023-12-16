@@ -11,7 +11,7 @@ export default function UserForm({
 }) {
     return (
         <div className="flex justify-center items-center mt-[calc(59px)]">
-            <div className="border-2 shadow rounded-md p-5 lg:w-5/12 xl:w-4/12">
+            <div className="border-2 shadow rounded-md p-5 lg:w-5/12 xl:w-4/12 bg-white">
                 <form action={action} onSubmit={onSubmit}>
                     {children}
                 </form>

@@ -63,7 +63,7 @@ export default function CalculatorBmi() {
             
             <main>
                 <div className="w-screen flex justify-center mt-[calc(56px)]">
-                    <div className="border-2 rounded-md w-3/12 p-5">
+                    <div className="border-2 rounded-md w-3/12 p-5 bg-white">
                         <form onSubmit={onSubmit}>
                             <fieldset>
                                 <legend className="text-xl text-center pb-5">Body Mass Index Calculator</legend>
