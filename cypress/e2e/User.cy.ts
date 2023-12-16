@@ -7,7 +7,7 @@ const user = {
 }
 
 
-describe('User Authentication', async () => {
+describe('User Authentication', () => {
   beforeEach(() => {
     cy.visit("/api/auth/signout");
     cy.visit("/");

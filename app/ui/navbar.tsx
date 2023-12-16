@@ -8,7 +8,7 @@ export default function NavBar() {
     const { data: session, status } = useSession();
 
     return (
-        <nav className="max-w-screen shadow p-4 flex justify-center">
+        <nav className="max-w-screen shadow p-4 flex justify-center bg-white">
             <div className="container grid grid-cols-3 content-center">
                 <div>
                     <Link href="/" className="font-bold">Fizeek.</Link>
