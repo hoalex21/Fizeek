@@ -65,18 +65,23 @@ describe('User Authentication', async () => {
     });
   });
 
-  ["/auth/login", "/api/auth/signin"].forEach(url => {
-    it('Logged in user should be able to sign out by url', () => {
+  [
+    {login: "/auth/login", signout: "auth/signout"}, 
+    {login: "/auth/login", signout: "/api/auth/signout"}, 
+    {login: "/api/auth/signin", signout: "auth/signout"}, 
+    {login: "/api/auth/signin", signout: "/api/auth/signout"},
+  ].forEach(urls => {
+    it('Logged in user should be able to sign out by signout url', () => {
       // Arrange
       cy.task('insertUser', user);
-      cy.visit(url);
+      cy.visit(urls.login);
       cy.inputLogin(user.email, user.password);
 
       // Act
-      cy.visit("/auth/signout");
+      cy.visit(urls.signout);
 
       // Assert
-      cy.location('pathname').should('eq', '/auth/signup');
+      cy.url().should('eq', Cypress.config().baseUrl);
       cy.get('nav').contains('Sign Up');
       cy.get('nav').contains('Login');
     });
