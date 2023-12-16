@@ -13,9 +13,19 @@ export default function SideBar() {
                         General
                     </li>
                 </Link>
+                <Link href="/settings/security">
+                    <li className={pathName === "/settings/security" ? "p-2 my-2 rounded-md bg-blue-500 text-white" : "p-2 my-2"}>
+                        Security
+                    </li>
+                </Link>
                 <Link href="/settings/anthropometry">
                     <li className={pathName === "/settings/anthropometry" ? "p-2 my-2 rounded-md bg-blue-500 text-white" : "p-2 my-2"}>
                         Anthropometry
+                    </li>
+                </Link>
+                <Link href="/settings/signout">
+                    <li className={pathName === "/settings/signout" ? "p-2 my-2 rounded-md bg-red-500 text-white" : "p-2 my-2"}>
+                        Sign Out
                     </li>
                 </Link>
             </ul>
