@@ -8,7 +8,8 @@ const password = "B!1bbbbb";
 describe('signup', async () => {
   it('New user should be able to signup for an account', async () => {
     // Arrange
-    cy.exec('npx prisma migrate reset --force');
+    // cy.exec('npx prisma migrate reset --force');
+    cy.task('removeUserByEmail', email);
     cy.visit("/auth/signup");
 
     // Act
