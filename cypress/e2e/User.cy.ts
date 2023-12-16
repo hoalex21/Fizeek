@@ -37,7 +37,7 @@ describe('User Authentication', async () => {
     it('Registered user should be able to login', () => {
       // Arrange
       cy.task('insertUser', user);
-      cy.visit("/auth/login");
+      cy.visit(url);
 
       // Act
       cy.inputLogin(user.email, user.password);
@@ -48,15 +48,30 @@ describe('User Authentication', async () => {
     });
   });
 
-  ["/auth/login", "/api/auth/signin"].forEach((url) => {
-    it('Logged in user should be able to sign out', () => {
+  it('Logged in user should be able to sign out', () => {
+    // Arrange
+    cy.task('insertUser', user);
+    cy.visit('/auth/login');
+    cy.inputLogin(user.email, user.password);
+
+    // Act
+    cy.get('nav').contains('Sign Out').click();
+
+    // Assert
+    cy.url().should('eq', Cypress.config().baseUrl);
+    cy.get('nav').contains('Sign Up');
+    cy.get('nav').contains('Login');
+  });
+
+  ["auth/signout", "/api/auth/signout"].forEach((url) => {
+    it('Logged in user should be able to sign out by signout url', () => {
       // Arrange
       cy.task('insertUser', user);
-      cy.visit(url);
+      cy.visit('/auth/login');
       cy.inputLogin(user.email, user.password);
 
       // Act
-      cy.get('nav').contains('Sign Out').click();
+      cy.visit(url);
 
       // Assert
       cy.url().should('eq', Cypress.config().baseUrl);
@@ -66,24 +81,24 @@ describe('User Authentication', async () => {
   });
 
   [
-    {login: "/auth/login", signout: "auth/signout"}, 
-    {login: "/auth/login", signout: "/api/auth/signout"}, 
-    {login: "/api/auth/signin", signout: "auth/signout"}, 
-    {login: "/api/auth/signin", signout: "/api/auth/signout"},
-  ].forEach(urls => {
-    it('Logged in user should be able to sign out by signout url', () => {
+    "/auth/login",
+    "/api/auth/signin",
+    "/auth/signup"
+  ].forEach((url) => {
+    it('Logged in user should be restricted from signup and login pages', () => {
       // Arrange
       cy.task('insertUser', user);
-      cy.visit(urls.login);
+      cy.visit('/auth/login');
+      cy.intercept('/').as('getHome');
       cy.inputLogin(user.email, user.password);
+      cy.wait('@getHome');
 
       // Act
-      cy.visit(urls.signout);
+      cy.visit(url);
 
       // Assert
       cy.url().should('eq', Cypress.config().baseUrl);
-      cy.get('nav').contains('Sign Up');
-      cy.get('nav').contains('Login');
+      cy.get('nav').contains('Sign Out');
     });
   });
 });
