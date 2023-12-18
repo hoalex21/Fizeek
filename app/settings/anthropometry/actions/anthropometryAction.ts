@@ -66,6 +66,8 @@ export default async function AnthropometryAction(email: string, prevState: any,
     console.log(user);
     console.log(height?.centimeters);
     console.log(weight?.kilograms);
+
+    return prevState;
 }
 
 async function getUser(email: string) {
