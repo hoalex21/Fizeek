@@ -48,6 +48,10 @@ export default async function AnthropometryAction(email: string, prevState: any,
                 }
             }
         });
+
+        prevState.message = "Your anthropometry data has been updated successfully."
+    } else {
+        prevState.message = "";
     }
 
     const height = await prisma.height.findFirst({
@@ -68,12 +72,4 @@ export default async function AnthropometryAction(email: string, prevState: any,
     console.log(weight?.kilograms);
 
     return prevState;
-}
-
-async function getUser(email: string) {
-    return await prisma.user.findFirst({
-        where: {
-            email: email
-        }
-    });
 }
