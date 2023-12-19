@@ -3,6 +3,13 @@
 import { useSession } from "next-auth/react";
 import { useFormState } from "react-dom";
 import AnthropometryAction from "./actions/anthropometryAction";
+import useSWR from "swr";
+
+const fetcher = async () => {
+    const response = await fetch("/settings/anthropometry/api");
+    const data = await response.json();
+    return data;
+}
 
 const initialState = {
     message: null
@@ -10,8 +17,13 @@ const initialState = {
 
 export default function Anthropometry() {
     const { data: session, status } = useSession();
-    const AnthropometryActionWithEmail = AnthropometryAction.bind(null, session?.user?.email ? session.user.email : "");
+    const email = session?.user?.email;
+    const AnthropometryActionWithEmail = AnthropometryAction.bind(null, email ? email : "");
     const [state, formAction] = useFormState(AnthropometryActionWithEmail, initialState);
+    const { data, error } = useSWR("anthropometry", fetcher);
+
+    console.log(data);
+    console.log(error);
 
     return (
         <div>
