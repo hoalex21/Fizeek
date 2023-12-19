@@ -12,7 +12,7 @@ export default async function EditAnthropometry(email: string, prevState: any, f
     const centimeters = formData.get("centimeters")?.toString();
     const kilograms = formData.get("kilograms")?.toString();
 
-    if (user[0] && centimeters && kilograms) {
+    if (user[0] && typeof centimeters === "string" && typeof kilograms === "string") {
         await prisma.user.update({
             where: {
                 id: user[0].id
