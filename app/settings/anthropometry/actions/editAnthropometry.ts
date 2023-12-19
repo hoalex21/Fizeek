@@ -2,7 +2,7 @@
 
 import prisma from "@/db";
 
-export default async function AnthropometryAction(email: string, prevState: any, formData: FormData) {
+export default async function EditAnthropometry(email: string, prevState: any, formData: FormData) {
     const user = await prisma.user.findMany({
         where: {
             email: email

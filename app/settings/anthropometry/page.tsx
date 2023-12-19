@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useFormState } from "react-dom";
-import AnthropometryAction from "./actions/anthropometryAction";
+import EditAnthropometry from "./actions/editAnthropometry";
 import { useEffect, useState } from "react";
 import AnthropometryData from "./actions/anthopometryData";
 
@@ -10,7 +10,7 @@ const initialState = {
     message: null
 }
 
-const initialAnthropometryState = {
+const initialUserAnthropometry = {
     height: "",
     weight: ""
 }
@@ -19,17 +19,17 @@ export default function Anthropometry() {
     const { data: session, status } = useSession();
     const email = session?.user?.email;
 
-    const AnthropometryActionWithEmail = AnthropometryAction.bind(null, email ? email : "");
-    const [state, formAction] = useFormState(AnthropometryActionWithEmail, initialState);
+    const EditAnthropometryWithEmail = EditAnthropometry.bind(null, email ? email : "");
+    const [editAnthropometryActionState, editAnthropometryAction] = useFormState(EditAnthropometryWithEmail, initialState);
 
-    const [anthropometry, setAntropometry] = useState(initialAnthropometryState);
+    const [userAnthropometry, setUserAntropometry] = useState(initialUserAnthropometry);
     useEffect(() => {
-        const updateAnthropometry = async () => {
-            const updatedAnthropometry = await AnthropometryData(email);
-            setAntropometry(updatedAnthropometry);
+        const updateUserAnthropometry = async () => {
+            const updatedUserAnthropometry = await AnthropometryData(email);
+            setUserAntropometry(updatedUserAnthropometry);
         }
 
-        updateAnthropometry();
+        updateUserAnthropometry();
     }, []);
 
     return (
@@ -39,24 +39,24 @@ export default function Anthropometry() {
             </div>
 
             {
-                state.message ? 
+                editAnthropometryActionState.message ? 
                 <div>
-                    <span>{state.message}</span>
+                    <span>{editAnthropometryActionState.message}</span>
                 </div>
                 :
                 <></>
             }
 
-            <form action={formAction}>
+            <form action={editAnthropometryAction}>
                 <span>Height: </span>
-                <input className="w-20 border-2 rounded-md pl-1" id="centimeters" name="centimeters" defaultValue={anthropometry.height} />
+                <input className="w-14 border-2 rounded-md pl-1" id="centimeters" name="centimeters" defaultValue={userAnthropometry.height} />
                 <label> Centimeters</label>
 
                 <br></br>
                 <br></br>
 
                 <span>Weight: </span>
-                <input className="w-20 border-2 rounded-md pl-1" id="kilograms" name="kilograms" defaultValue={anthropometry.weight} />
+                <input className="w-14 border-2 rounded-md pl-1" id="kilograms" name="kilograms" defaultValue={userAnthropometry.weight} />
                 <label> Kilograms</label>
 
                 <br></br>
