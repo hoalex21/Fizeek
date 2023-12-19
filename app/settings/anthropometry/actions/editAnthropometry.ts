@@ -12,7 +12,12 @@ export default async function EditAnthropometry(email: string, prevState: any, f
     const centimeters = formData.get("centimeters")?.toString();
     const kilograms = formData.get("kilograms")?.toString();
 
-    if (user[0] && typeof centimeters === "string" && typeof kilograms === "string") {
+    if (user[0] && 
+        (centimeters === "" || (typeof centimeters === "string" && !isNaN(parseFloat(centimeters)))) && 
+        (kilograms === "" || (typeof kilograms === "string" && !isNaN(parseFloat(kilograms))))
+    ) {
+        console.log("edit centimeters", centimeters);
+        console.log("edit centimeters", kilograms);
         await prisma.user.update({
             where: {
                 id: user[0].id
@@ -21,10 +26,10 @@ export default async function EditAnthropometry(email: string, prevState: any, f
                 height: {
                     upsert: {
                         create: {
-                            centimeters: parseInt(centimeters)
+                            centimeters: parseFloat(centimeters)
                         },
                         update: {
-                            centimeters: parseInt(centimeters)
+                            centimeters: parseFloat(centimeters)
                         }
                     }
                 }
@@ -39,10 +44,10 @@ export default async function EditAnthropometry(email: string, prevState: any, f
                 weight: {
                     upsert: {
                         create: {
-                            kilograms: parseInt(kilograms)
+                            kilograms: parseFloat(kilograms)
                         },
                         update: {
-                            kilograms: parseInt(kilograms)
+                            kilograms: parseFloat(kilograms)
                         }
                     }
                 }
@@ -53,18 +58,6 @@ export default async function EditAnthropometry(email: string, prevState: any, f
     } else {
         prevState.message = "";
     }
-
-    const height = await prisma.height.findFirst({
-        where: {
-            userId: user[0]?.id
-        }
-    });
-
-    const weight = await prisma.weight.findFirst({
-        where: {
-            userId: user[0]?.id
-        }
-    });
 
     return prevState;
 }

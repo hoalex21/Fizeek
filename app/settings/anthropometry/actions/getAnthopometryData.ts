@@ -26,8 +26,19 @@ export default async function GetAnthropometryData(email: string | null | undefi
                     }
                 });
 
+                if (height) {
+                    console.log("get height", height.centimeters);
+                }
+            
+                if (weight) {
+                    console.log("get weight", weight.kilograms);
+                }
+
                 const centimeters = height?.centimeters ? height.centimeters.toString() : "";
                 const kilograms = weight?.kilograms ? weight.kilograms.toString() : "";
+
+                console.log("get centimeters", centimeters);
+                console.log("get kilograms", kilograms);
 
                 return { height: centimeters, weight: kilograms }
             }
