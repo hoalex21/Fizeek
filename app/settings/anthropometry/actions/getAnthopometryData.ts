@@ -2,7 +2,7 @@
 
 import prisma from "@/db";
 
-export default async function AnthropometryData(email: string | null | undefined) {
+export default async function GetAnthropometryData(email: string | null | undefined) {
     if (email) {
         const user = await prisma.user.findFirst({
             where: {

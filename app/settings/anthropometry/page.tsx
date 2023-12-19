@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { useFormState } from "react-dom";
 import EditAnthropometry from "./actions/editAnthropometry";
 import { useEffect, useState } from "react";
-import AnthropometryData from "./actions/anthopometryData";
+import GetAnthropometryData from "./actions/getAnthopometryData";
 
 const initialState = {
     message: null
@@ -25,7 +25,7 @@ export default function Anthropometry() {
     const [userAnthropometry, setUserAntropometry] = useState(initialUserAnthropometry);
     useEffect(() => {
         const updateUserAnthropometry = async () => {
-            const updatedUserAnthropometry = await AnthropometryData(email);
+            const updatedUserAnthropometry = await GetAnthropometryData(email);
             setUserAntropometry(updatedUserAnthropometry);
         }
 
