@@ -72,17 +72,17 @@ export default function CalculatorBmi() {
                                 <div className="py-5">
                                     <span>Height: </span>
 
-                                    <input className="w-10 border-2 rounded-md pl-1" maxLength={2} id="feet" name="feet" />
+                                    <input className="w-16 border-2 rounded-md pl-1" maxLength={5} id="feet" name="feet" />
                                     <label className="mr-4"> Feet</label>
 
-                                    <input className="w-10 border-2 rounded-md pl-1" maxLength={2} id="inches" name="inches" />
+                                    <input className="w-16 border-2 rounded-md pl-1" maxLength={5} id="inches" name="inches" />
                                     <label> Inches</label>
 
                                     <br />
                                     <br />
 
                                     <span>Weight: </span>
-                                    <input className="w-10 border-2 rounded-md pl-1" id="pounds" name="pounds" />
+                                    <input className="w-20 border-2 rounded-md pl-1" id="pounds" name="pounds" />
                                     <label> Pounds</label>
 
                                     <br />
