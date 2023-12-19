@@ -3,27 +3,34 @@
 import { useSession } from "next-auth/react";
 import { useFormState } from "react-dom";
 import AnthropometryAction from "./actions/anthropometryAction";
-import useSWR from "swr";
-
-const fetcher = async () => {
-    const response = await fetch("/settings/anthropometry/api");
-    const data = await response.json();
-    return data;
-}
+import { useEffect, useState } from "react";
+import AnthropometryData from "./actions/anthopometryData";
 
 const initialState = {
     message: null
 }
 
+const initialAnthropometryState = {
+    height: "",
+    weight: ""
+}
+
 export default function Anthropometry() {
     const { data: session, status } = useSession();
     const email = session?.user?.email;
+
     const AnthropometryActionWithEmail = AnthropometryAction.bind(null, email ? email : "");
     const [state, formAction] = useFormState(AnthropometryActionWithEmail, initialState);
-    const { data, error } = useSWR("anthropometry", fetcher);
 
-    console.log(data);
-    console.log(error);
+    const [anthropometry, setAntropometry] = useState(initialAnthropometryState);
+    useEffect(() => {
+        const updateAnthropometry = async () => {
+            const updatedAnthropometry = await AnthropometryData(email);
+            setAntropometry(updatedAnthropometry);
+        }
+
+        updateAnthropometry();
+    }, []);
 
     return (
         <div>
@@ -42,14 +49,14 @@ export default function Anthropometry() {
 
             <form action={formAction}>
                 <span>Height: </span>
-                <input className="w-20 border-2 rounded-md pl-1" id="centimeters" name="centimeters" />
+                <input className="w-20 border-2 rounded-md pl-1" id="centimeters" name="centimeters" defaultValue={anthropometry.height} />
                 <label> Centimeters</label>
 
                 <br></br>
                 <br></br>
 
                 <span>Weight: </span>
-                <input className="w-20 border-2 rounded-md pl-1" id="kilograms" name="kilograms" />
+                <input className="w-20 border-2 rounded-md pl-1" id="kilograms" name="kilograms" defaultValue={anthropometry.weight} />
                 <label> Kilograms</label>
 
                 <br></br>
