@@ -4,6 +4,8 @@ import NavBar from "@/app/ui/navbar";
 import { useFormState } from "react-dom";
 import Exercises from "./actions/exercises";
 import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const initialState = {
     message: "",
@@ -11,6 +13,8 @@ const initialState = {
 }
 
 export default function ExerciseRecommendation() {
+    const { data: session, status } = useSession();
+
     const [state, formAction] = useFormState(Exercises, initialState);
 
     useEffect(() => {
@@ -53,6 +57,10 @@ export default function ExerciseRecommendation() {
             recommendationDiv?.append(div);
         }
     }, [state]);
+
+    if (status === "unauthenticated") {
+        redirect("/auth/login");
+    }
 
     return (
         <>
