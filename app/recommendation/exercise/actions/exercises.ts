@@ -28,6 +28,10 @@ export default async function Exercises(prevState: any, formData: FormData) {
         } else {
             prevState.message = "";
             prevState.recommendations = data;
+
+            if (data.length === 0) {
+                prevState.message = "No recommendations found.";
+            }
         }
     }).catch((error) => {
         console.log(error);
