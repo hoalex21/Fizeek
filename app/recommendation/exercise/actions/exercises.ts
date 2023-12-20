@@ -9,7 +9,7 @@ export default async function Exercises(prevState: any, formData: FormData) {
     const muscle = formData.get("muscle");
     const difficulty = formData.get("difficulty");
 
-    const recommendations = await fetch(
+    await fetch(
         url + 
         `${name ? "?name=" + name : ""}` + 
         `${type ? "?type=" + type : ""}` + 
@@ -20,17 +20,20 @@ export default async function Exercises(prevState: any, formData: FormData) {
                 'X-Api-Key': key ? key : ""
             }
         }
-    ).then((response) => {
-        const data = response.json();
-        return data;
+    ).then(async (response) => {
+        const data = await response.json();
+        if (data.error) {
+            prevState.message = data.error;
+            prevState.recommendations = [];
+        } else {
+            prevState.message = "";
+            prevState.recommendations = data;
+        }
     }).catch((error) => {
         console.log(error);
-        return [];
-    })
-
-    prevState.recommendations = recommendations;
-
-    console.log(prevState);
+        prevState.message = error;
+        prevState.recommendations = [];
+    });
 
     return prevState;
 }

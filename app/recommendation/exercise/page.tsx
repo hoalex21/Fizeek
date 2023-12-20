@@ -3,6 +3,7 @@
 import NavBar from "@/app/ui/navbar";
 import { useFormState } from "react-dom";
 import Exercises from "./actions/exercises";
+import { useEffect } from "react";
 
 const initialState = {
     message: "",
@@ -11,6 +12,33 @@ const initialState = {
 
 export default function ExerciseRecommendation() {
     const [state, formAction] = useFormState(Exercises, initialState);
+
+    useEffect(() => {
+        const recommendationDiv = document.getElementById("recommendations");
+
+        for (const recommendation of state.recommendations) {
+            const div = document.createElement("div");
+            const br = document.createElement("br");
+
+            const name = document.createElement("p");
+            const type = document.createElement("p");
+            const muscle = document.createElement("p");
+            const equipment = document.createElement("p");
+            const difficulty = document.createElement("p");
+            const instructions = document.createElement("p");
+
+            name.innerText = recommendation.name;
+            type.innerText = recommendation.type;
+            muscle.innerText = recommendation.muscle;
+            equipment.innerText = recommendation.equipment;
+            difficulty.innerText = recommendation.difficulty;
+            instructions.innerText = recommendation.instructions;
+
+            div.append(name, type, muscle, equipment, difficulty, instructions, br);
+
+            recommendationDiv?.append(div);
+        }
+    }, [state]);
 
     return (
         <>
@@ -88,6 +116,13 @@ export default function ExerciseRecommendation() {
 
                             <button type="submit" className="w-full py-1 rounded-lg bg-white border-2 border-black text-black">Search</button>
                         </form>
+                    </div>
+
+                    <br></br>
+
+                    {/* Populate exercise recommendations. Otherwise, show error message. */}
+                    <div id="recommendations">
+
                     </div>
                 </div>
             </div>
