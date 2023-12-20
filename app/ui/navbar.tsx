@@ -18,6 +18,9 @@ export default function NavBar() {
                 <div className="flex justify-center">
                     <ul className="flex">
                         <li>
+                            <Link href="/recommendation/exercise" className="mr-4">Exercise</Link>
+                        </li>
+                        <li>
                             <Link href="/calculator/bmi" className="mr-4">BMI</Link>
                         </li>
                     </ul>
