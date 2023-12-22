@@ -35,7 +35,7 @@ export default function NavBar() {
                                 <div className="absolute bg-white h-fit">
                                     <ul>
                                         <li>
-                                            <Link href="#" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">Exercise</Link>
+                                            <Link href="/recommendation/exercise" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">Exercise</Link>
                                         </li>
                                         <li>
                                             <Link href="#" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">Food</Link>
@@ -56,7 +56,7 @@ export default function NavBar() {
                                 <div className="absolute bg-white h-fit">
                                     <ul>
                                         <li>
-                                            <Link href="#" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">BMI</Link>
+                                            <Link href="/calculator/bmi" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">BMI</Link>
                                         </li>
                                         <li>
                                             <Link href="#" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">BMR</Link>
