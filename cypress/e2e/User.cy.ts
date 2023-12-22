@@ -60,7 +60,7 @@ describe('User Authentication', () => {
     // Assert
     cy.url().should('eq', Cypress.config().baseUrl);
     cy.get('nav').contains('Sign Up');
-    cy.get('nav').contains('Login');
+    cy.get('nav').contains('Log In');
   });
 
   ["auth/signout", "/api/auth/signout"].forEach((url) => {
@@ -76,7 +76,7 @@ describe('User Authentication', () => {
       // Assert
       cy.url().should('eq', Cypress.config().baseUrl);
       cy.get('nav').contains('Sign Up');
-      cy.get('nav').contains('Login');
+      cy.get('nav').contains('Log In');
     });
   });
 
@@ -105,7 +105,7 @@ describe('User Authentication', () => {
   it('Signup through need an account', () => {
     // Arrange
     cy.visit('/');
-    cy.get('a').contains('Login').click();
+    cy.get('a').contains('Log In').click();
     cy.get('a').contains('here').click();
 
     // Act
