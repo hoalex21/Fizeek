@@ -37,12 +37,12 @@ export default function NavBar() {
                                         <li>
                                             <Link href="/recommendation/exercise" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">Exercise</Link>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <Link href="#" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">Food</Link>
                                         </li>
                                         <li>
                                             <Link href="#" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">Pose</Link>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
                             ) : null
@@ -50,7 +50,7 @@ export default function NavBar() {
                     </div>
 
                     <div>
-                        <button onClick={handleCalculatorDropdown} className="py-4 px-2 active:bg-gray-300">Exercises</button>
+                        <button onClick={handleCalculatorDropdown} className="py-4 px-2 active:bg-gray-300">Calculators</button>
                         {
                             calculatorDropdown ? (
                                 <div className="absolute bg-white h-fit">
@@ -58,9 +58,9 @@ export default function NavBar() {
                                         <li>
                                             <Link href="/calculator/bmi" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">BMI</Link>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <Link href="#" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">BMR</Link>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
                             ) : null
