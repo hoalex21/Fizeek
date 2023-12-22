@@ -62,7 +62,7 @@ export default function CalculatorBmi() {
             <NavBar />
             
             <main>
-                <div className="w-screen flex justify-center mt-[calc(56px)]">
+                <div className="w-full flex justify-center mt-[calc(56px)]">
                     <div className="border-2 rounded-md w-3/12 p-5 bg-white">
                         <form onSubmit={onSubmit}>
                             <fieldset>

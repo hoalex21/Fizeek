@@ -67,7 +67,7 @@ export default function ExerciseRecommendation() {
             <NavBar />
 
             <div className="text-white mt-[calc(56px)]">
-                <div className="w-screen text-center">
+                <div className="w-full text-center">
                     <p className="text-lg">Exercise Recommendations</p>
 
                     <br></br>
