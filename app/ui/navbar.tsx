@@ -20,14 +20,14 @@ export default function NavBar() {
     }
 
     return (
-        <nav className="max-w-full shadow-xl flex justify-center bg-white">
-            <div className="container grid grid-cols-3">
-                <div className="p-4">
+        <nav className="max-w-full shadow-xl md:flex justify-center bg-white">
+            <div className="container md:grid md:grid-cols-3">
+                <div className="md:px-4 px-2 py-4">
                     <Link href="/" className="font-bold">Fizeek</Link>
                 </div>
 
                 {/* Site Features */}
-                <div className="flex justify-center">
+                <div className="md:flex justify-center">
                     <div>
                         <button onClick={handleRecommendationDropdown} className="py-4 px-2 active:bg-gray-300">Recommendations</button>
                         {
@@ -60,7 +60,7 @@ export default function NavBar() {
                 </div>
 
                 {/* Site Authentication */}
-                <div className="flex justify-end p-4">
+                <div className="md:flex justify-end md:px-4 px-2 py-4">
                     <ul className="flex">
                         {
                             status === "authenticated"? (
