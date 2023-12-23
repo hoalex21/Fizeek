@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <NavBar />
 
-      <div className='-z-10 absolute w-screen h-[calc(100vh-56px)] opacity-75'>
+      <div className='-z-10 absolute w-full h-[calc(100vh-56px)] opacity-75'>
         <Image
           src="/back.jpg" 
           alt="A bodybuilder performing a back pose."

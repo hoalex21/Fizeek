@@ -20,7 +20,7 @@ export default function NavBar() {
     }
 
     return (
-        <nav className="max-w-screen shadow-xl flex justify-center bg-white">
+        <nav className="max-w-full shadow-xl flex justify-center bg-white">
             <div className="container grid grid-cols-3">
                 <div className="p-4">
                     <Link href="/" className="font-bold">Fizeek</Link>
