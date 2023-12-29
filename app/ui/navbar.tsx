@@ -7,6 +7,13 @@ import { signOut, useSession } from "next-auth/react";
 export default function NavBar() {
     const { data: session, status } = useSession();
 
+    const [dropdown, setDropdown] = useState(false);
+    const handleDropdown = () => {
+        setRecommendationDropdown(false);
+        setCalculatorDropdown(false);
+        setDropdown(!dropdown);
+    }
+
     const [recommendationDropdown, setRecommendationDropdown] = useState(false);
     const handleRecommendationDropdown = () => {
         setCalculatorDropdown(false);
@@ -20,19 +27,29 @@ export default function NavBar() {
     }
 
     return (
-        <nav className="max-w-full shadow-xl flex justify-center bg-white">
-            <div className="container grid grid-cols-3">
-                <div className="p-4">
+        <nav className="w-screen shadow-xl md:flex justify-center bg-white">
+            <div className="md:container md:grid md:grid-cols-3">
+                <div className="flex justify-between md:px-4 px-2 py-4">
                     <Link href="/" className="font-bold">Fizeek</Link>
+                    <div onClick={handleDropdown} className="space-y-2 md:hidden">
+                        <div className="w-8 h-0.5 bg-black"></div>
+                        <div className="w-8 h-0.5 bg-black"></div>
+                        <div className="w-8 h-0.5 bg-black"></div>
+                    </div>
                 </div>
 
                 {/* Site Features */}
-                <div className="flex justify-center">
+                <div className={
+                    dropdown ?
+                    "md:block md:flex md:justify-center"
+                    :
+                    "hidden md:block md:flex md:justify-center"
+                }>
                     <div>
-                        <button onClick={handleRecommendationDropdown} className="py-4 px-2 active:bg-gray-300">Recommendations</button>
+                        <button onClick={handleRecommendationDropdown} className="py-4 px-2 text-left w-full md:w-fit hover:bg-gray-300">Recommendations</button>
                         {
                             recommendationDropdown ? (
-                                <div className="absolute bg-white h-fit">
+                                <div className="md:absolute bg-white h-fit">
                                     <ul>
                                         <li>
                                             <Link href="/recommendation/exercise" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">Exercise</Link>
@@ -44,10 +61,10 @@ export default function NavBar() {
                     </div>
 
                     <div>
-                        <button onClick={handleCalculatorDropdown} className="py-4 px-2 active:bg-gray-300">Calculators</button>
+                        <button onClick={handleCalculatorDropdown} className="py-4 px-2 text-left w-full md:w-fit hover:bg-gray-300">Calculators</button>
                         {
                             calculatorDropdown ? (
-                                <div className="absolute bg-white h-fit">
+                                <div className="md:absolute bg-white h-fit">
                                     <ul>
                                         <li>
                                             <Link href="/calculator/bmi" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">BMI</Link>
@@ -60,7 +77,12 @@ export default function NavBar() {
                 </div>
 
                 {/* Site Authentication */}
-                <div className="flex justify-end p-4">
+                <div className={
+                    dropdown ?
+                    "md:block md:flex justify-end md:px-4 px-2 py-4"
+                    :
+                    "hidden md:block md:flex justify-end md:px-4 px-2 py-4"
+                }>
                     <ul className="flex">
                         {
                             status === "authenticated"? (
