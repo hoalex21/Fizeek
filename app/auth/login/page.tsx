@@ -34,7 +34,7 @@ export default function Login() {
             <main>
                 <UserForm onSubmit={onSubmit}>
                     <fieldset>
-                        <legend className="text-center">
+                        <legend className="text-center text-lg">
                             Log in to Fizeek
                         </legend>
 
@@ -51,7 +51,7 @@ export default function Login() {
                     <div className="flex justify-between items-center">
                         <p>Need an account? Sign up <Link href="/auth/signup" className="text-blue-500">here</Link>.</p>
                         
-                        <button type="submit" className="bg-black text-white rounded-lg p-2">
+                        <button type="submit" className="bg-black text-white p-2">
                             Log In
                         </button>
                     </div>

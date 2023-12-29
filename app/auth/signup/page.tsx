@@ -35,7 +35,7 @@ export default function Signup() {
             <main>
                 <UserForm action={formAction}>
                     <fieldset>
-                        <legend className="text-center">
+                        <legend className="text-center text-lg">
                             Create a Fizeek account
                         </legend>
 
@@ -59,10 +59,12 @@ export default function Signup() {
 
                     <br />
 
-                    <div className="flex justify-between items-center">
+                    <div className="lg:flex lg:justify-between items-center">
                         <p>Already have an account? Log in <Link href="/auth/login" className="text-blue-500">here</Link>.</p>
+
+                        <div className="block lg:hidden"><br></br></div>
                         
-                        <button type="submit" className="bg-black text-white rounded-lg p-2">
+                        <button type="submit" className="bg-black text-white p-2 float-right">
                             Sign Up
                         </button>
                     </div>

@@ -18,9 +18,9 @@ export default function UserInput({
             <label>{label}</label> <br />
             {
                 error?
-                <input type={type} id={id} name={name} className="w-full border-2 rounded-md pl-2 border-red-500" />
+                <input type={type} id={id} name={name} className="w-full border-2 border-red-500" />
                 :
-                <input type={type} id={id} name={name} className="w-full border-2 rounded-md pl-2" />
+                <input type={type} id={id} name={name} className="w-full border-2" />
             }
             {
                 error?
