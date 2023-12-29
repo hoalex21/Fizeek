@@ -27,7 +27,7 @@ export default function NavBar() {
     }
 
     return (
-        <nav className="w-screen shadow-xl md:flex justify-center bg-white">
+        <nav className="w-full shadow-xl md:flex justify-center bg-white">
             <div className="md:container md:grid md:grid-cols-3">
                 <div className="flex justify-between md:px-4 px-2 py-4">
                     <Link href="/" className="font-bold">Fizeek</Link>
