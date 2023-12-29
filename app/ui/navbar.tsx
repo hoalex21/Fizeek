@@ -21,18 +21,18 @@ export default function NavBar() {
 
     return (
         <nav className="w-screen shadow-xl md:flex justify-center bg-white">
-            <div className="container md:grid md:grid-cols-3">
+            <div className="md:container md:grid md:grid-cols-3">
                 <div className="md:px-4 px-2 py-4">
                     <Link href="/" className="font-bold">Fizeek</Link>
                 </div>
 
                 {/* Site Features */}
-                <div className="md:flex justify-center">
+                <div className="md:flex md:justify-center">
                     <div>
-                        <button onClick={handleRecommendationDropdown} className="py-4 px-2 active:bg-gray-300">Recommendations</button>
+                        <button onClick={handleRecommendationDropdown} className="py-4 px-2 text-left w-full md:w-fit hover:bg-gray-300">Recommendations</button>
                         {
                             recommendationDropdown ? (
-                                <div className="absolute bg-white h-fit">
+                                <div className="md:absolute bg-white h-fit">
                                     <ul>
                                         <li>
                                             <Link href="/recommendation/exercise" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">Exercise</Link>
@@ -44,10 +44,10 @@ export default function NavBar() {
                     </div>
 
                     <div>
-                        <button onClick={handleCalculatorDropdown} className="py-4 px-2 active:bg-gray-300">Calculators</button>
+                        <button onClick={handleCalculatorDropdown} className="py-4 px-2 text-left w-full md:w-fit hover:bg-gray-300">Calculators</button>
                         {
                             calculatorDropdown ? (
-                                <div className="absolute bg-white h-fit">
+                                <div className="md:absolute bg-white h-fit">
                                     <ul>
                                         <li>
                                             <Link href="/calculator/bmi" className="flex ps-6 pe-16 py-4 hover:bg-gray-300">BMI</Link>
