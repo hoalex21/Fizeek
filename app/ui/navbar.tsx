@@ -39,7 +39,12 @@ export default function NavBar() {
                 </div>
 
                 {/* Site Features */}
-                <div className="hidden md:block md:flex md:justify-center">
+                <div className={
+                    dropdown ?
+                    "md:block md:flex md:justify-center"
+                    :
+                    "hidden md:block md:flex md:justify-center"
+                }>
                     <div>
                         <button onClick={handleRecommendationDropdown} className="py-4 px-2 text-left w-full md:w-fit hover:bg-gray-300">Recommendations</button>
                         {
@@ -72,7 +77,12 @@ export default function NavBar() {
                 </div>
 
                 {/* Site Authentication */}
-                <div className="hidden md:block md:flex justify-end md:px-4 px-2 py-4">
+                <div className={
+                    dropdown ?
+                    "md:block md:flex justify-end md:px-4 px-2 py-4"
+                    :
+                    "hidden md:block md:flex justify-end md:px-4 px-2 py-4"
+                }>
                     <ul className="flex">
                         {
                             status === "authenticated"? (
