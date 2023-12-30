@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import UserInput from "../ui/user-input";
 import UserForm from "../ui/user-form";
@@ -9,6 +9,7 @@ import { useFormState } from "react-dom";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import NavBar from "@/app/ui/navbar";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const initialState = {
     errorFirstName: null,
@@ -20,9 +21,16 @@ const initialState = {
     errorPasswordConfirmation: null
 }
 
+const sitekey = "6Ldz3kApAAAAALcPUe8I74O8_yYszHF5miC_k3D8";
+
 export default function Signup() {
     const { data: session, status } = useSession();
     const [state, formAction] = useFormState(SignupAccount, initialState);
+    
+    const [recaptchaValue, setRecaptchaValue] = useState(false);
+    const recaptchaChange = (value: string | null) => {
+        value !== null ? setRecaptchaValue(true) : setRecaptchaValue(false);
+    }
 
     if (status === "authenticated") {
         redirect("/");
@@ -59,14 +67,28 @@ export default function Signup() {
 
                     <br />
 
+                    <ReCAPTCHA
+                        sitekey={sitekey}
+                        onChange={recaptchaChange}
+                    />
+
+                    <br />
+
                     <div className="lg:flex lg:justify-between items-center">
                         <p>Already have an account? Log in <Link href="/auth/login" className="text-blue-500">here</Link>.</p>
 
                         <div className="block lg:hidden"><br></br></div>
-                        
-                        <button type="submit" className="bg-black text-white p-2 float-right">
-                            Sign Up
-                        </button>
+
+                        {
+                            recaptchaValue ?
+                            <button type="submit" className="bg-black text-white p-2 float-right">
+                                Sign Up
+                            </button>
+                            :
+                            <button type="submit" className="bg-black text-white p-2 float-right opacity-50" disabled>
+                                Sign Up
+                            </button>
+                        }
                     </div>
                 </UserForm>
             </main>
