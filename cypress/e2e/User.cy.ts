@@ -40,7 +40,7 @@ describe('User Authentication', () => {
       cy.visit(url);
 
       // Act
-      cy.inputLogin(user.email, user.password);
+      cy.inputLogin(user.email.toUpperCase(), user.password);
 
       // Assert
       cy.url().should('eq', Cypress.config().baseUrl);
@@ -140,5 +140,5 @@ describe('User Authentication', () => {
     // Arrange
     cy.url().should('eq', Cypress.config().baseUrl);
     cy.get('nav').contains('Sign Out');
-  })
+  });
 });

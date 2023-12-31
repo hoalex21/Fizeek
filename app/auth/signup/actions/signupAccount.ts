@@ -98,7 +98,7 @@ export default async function SignupAccount(prevState: any, formData: FormData) 
             data: {
                 firstName: firstName,
                 lastName: lastName,
-                email: email,
+                email: email.toLowerCase(),
                 username: username,
                 password: passwordHash,
             }
